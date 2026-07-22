@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BasicAudioAnalyzer : MonoBehaviour
@@ -13,6 +14,9 @@ public class BasicAudioAnalyzer : MonoBehaviour
     [SerializeField] string CurrentEquatedInfluence; //Based on the inputs, what would the game craft?
 
     [SerializeField] TMP_Text MusicPlayerStateText; //Display button to start or stop the music player
+
+    [SerializeField] TMP_Text CurrentLoudnessText; //Display of the current loudness of the selected clips
+    [SerializeField] TMP_Text InfluenceState; //What type of influence will the music player convey
 
     AudioSource audSource; //Audio source
     AudioAnalyzer audAnalyzer; //Create a new audio analyzer
@@ -83,7 +87,6 @@ public class BasicAudioAnalyzer : MonoBehaviour
 
             totalLoudness += clipSoundVolume; //Add the found volume
         }
-        return; //Temp
 
         //Analyze the type
 
@@ -104,23 +107,13 @@ public class BasicAudioAnalyzer : MonoBehaviour
 
         List<string> possibleInfluences = new(); //List in the case there was more than a singular match
 
-        if (highest == forestInfluence && forestInfluence is not 0)
-        {
-            possibleInfluences.Add("Forest"); //Add to the possibilities list
-            Debug.Log("Enact Forest");
-        }
 
-        if (highest == caveInfluence && caveInfluence is not 0)
-        {
-            possibleInfluences.Add("Cave"); //Add to the possibilities list
-            Debug.Log("Enact Cave");
-        }
+        if (highest == forestInfluence && forestInfluence is not 0) possibleInfluences.Add("Forest"); //Add to the possibilities list
 
-        if (highest == snowInfluence && snowInfluence is not 0)
-        {
-            possibleInfluences.Add("Snow"); //Add to the possibilities list
-            Debug.Log("Enact Snow");
-        }
+        if (highest == caveInfluence && caveInfluence is not 0) possibleInfluences.Add("Cave"); //Add to the possibilities list
+
+        if (highest == snowInfluence && snowInfluence is not 0) possibleInfluences.Add("Snow"); //Add to the possibilities list
+
 
         if (possibleInfluences.Count is 0) //No Match
         {
@@ -139,6 +132,64 @@ public class BasicAudioAnalyzer : MonoBehaviour
 
             CurrentEquatedInfluence = randomMix; //Set the randomly chosen possibility
         }
+
+        int volumeLevel = ReturnAudioLoudnessLevel(); //Grab the current audio level
+
+        //Switch case to determine the subset from the total loudness as long as it is not -1 and there is a current influence
+        if(volumeLevel != -1 && CurrentEquatedInfluence != "")
+        {
+            switch (CurrentEquatedInfluence)
+            {
+
+                case "Forest": //If the chosen influence is Forest
+
+                    if (volumeLevel is 0) InfluenceState.text = "[Whimsy Forest]"; //Debug.Log("Whimsy Forest"); //Volume <= 10
+
+                    else if (volumeLevel is 1) InfluenceState.text = "[Normal Forest]"; //Debug.Log("Normal Forest"); //Volume > 10 & <= 40
+
+                    else if (volumeLevel is 2) InfluenceState.text = "[Uneasy Forest]"; //Debug.Log("Uneasy Forest"); //Volume > 40
+
+                    break;
+
+                case "Snow": //If the chosen influence is Snow
+
+                    if (volumeLevel is 0) InfluenceState.text = "[Frozen Glacier]"; //Debug.Log("Frozen Glacier"); //Volume <= 10
+
+                    else if (volumeLevel is 1) InfluenceState.text = "[Snowy Wonderland]"; //Debug.Log("Snowy Wonderland"); //Volume > 10 & <= 40
+
+                    else if (volumeLevel is 2) InfluenceState.text = "[Snowstorm]"; //Debug.Log("Snowstorm"); //Volume > 40
+
+                    break;
+
+                case "Cave": //If the chosen influence is Cave
+
+                    if (volumeLevel is 0) InfluenceState.text = "[Crystal Cavern]"; //Debug.Log("Crystal Cavern"); //Volume <= 10
+
+                    else if (volumeLevel is 1) InfluenceState.text = "[Common Cave]"; //Debug.Log("Common Cave"); //Volume > 10 & <= 40
+
+                    else if (volumeLevel is 2) InfluenceState.text = "[Trembling Tunnels]"; //Debug.Log("Trembling Tunnels"); //Volume > 40
+
+                    break;
+            }
+        }
+        else
+        {
+            InfluenceState.text = "[No Identified Influence]";
+        }
+
+        CurrentLoudnessText.text = $"Current Volume: {totalLoudness.ToString("F2")}"; //Display the total loudness of the selected clips
+    }
+
+    //Function to return the audio level
+    int ReturnAudioLoudnessLevel()
+    {
+        if (totalLoudness is 0) return -1;
+
+        if (totalLoudness <= 10) return 0; //Return the quietest option
+
+        else if (totalLoudness > 10 && totalLoudness <= 40) return 1; //Return the medium volume
+
+        else return 2; //Else return the loudest state
     }
 
     //Function to check if the music box is currently playing or not

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioCollectable
   soundName: Wind Gust
   audioClip: {fileID: 8300000, guid: 2f172a3035d5753489bcf1d6b672cb6e, type: 3}
-  influenceStyle: Forest
+  influenceStyle: Cave
   influenceStrength: 0
