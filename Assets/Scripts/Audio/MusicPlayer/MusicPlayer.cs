@@ -5,6 +5,7 @@ public class MusicPlayer : MonoBehaviour
     public static MusicPlayer Instance;
 
     public MusicalInfluenceState musicalInfluenceState; //State that will effect the surroundings
+    public int modelIndex = -1; //What model should the effected turn to?
     [SerializeField] private bool bInfluenceSurroundings; //Should this current effect surroundings?
 
     public bool bIsRunning; //Comparator for other systems to check
@@ -48,7 +49,7 @@ public class MusicPlayer : MonoBehaviour
             return; //Return if this is not on the object
         }
 
-        influencedObject.SwitchInfluenceState(musicalInfluenceState);
+        influencedObject.SwitchInfluenceState(musicalInfluenceState, modelIndex);
     }
 
     //Function to change the ongoing state that the music player will influence to

@@ -143,31 +143,67 @@ public class BasicAudioAnalyzer : MonoBehaviour
 
                 case "Forest": //If the chosen influence is Forest
 
-                    if (volumeLevel is 0) InfluenceState.text = "[Whimsy Forest]"; //Debug.Log("Whimsy Forest"); //Volume <= 10
+                    if (volumeLevel is 0)  //Debug.Log("Whimsy Forest"); //Volume <= 10
+                    {
+                        InfluenceState.text = "[Whimsy Forest]";
+                        MusicPlayer.Instance.modelIndex = 0;
+                    }
 
-                    else if (volumeLevel is 1) InfluenceState.text = "[Normal Forest]"; //Debug.Log("Normal Forest"); //Volume > 10 & <= 40
+                    else if (volumeLevel is 1)  //Debug.Log("Normal Forest"); //Volume > 10 & <= 40
+                    {
+                        InfluenceState.text = "[Normal Forest]";
+                        MusicPlayer.Instance.modelIndex = 1;
+                    }
 
-                    else if (volumeLevel is 2) InfluenceState.text = "[Uneasy Forest]"; //Debug.Log("Uneasy Forest"); //Volume > 40
+                    else if (volumeLevel is 2)  //Debug.Log("Uneasy Forest"); //Volume > 40
+                    {
+                        InfluenceState.text = "[Uneasy Forest]";
+                        MusicPlayer.Instance.modelIndex = 2;
+                    }
 
                     break;
 
                 case "Snow": //If the chosen influence is Snow
 
-                    if (volumeLevel is 0) InfluenceState.text = "[Frozen Glacier]"; //Debug.Log("Frozen Glacier"); //Volume <= 10
+                    if (volumeLevel is 0)  //Debug.Log("Frozen Glacier"); //Volume <= 10
+                    {
+                        InfluenceState.text = "[Frozen Glacier]";
+                        MusicPlayer.Instance.modelIndex = 0;
+                    }
 
-                    else if (volumeLevel is 1) InfluenceState.text = "[Snowy Wonderland]"; //Debug.Log("Snowy Wonderland"); //Volume > 10 & <= 40
+                    else if (volumeLevel is 1) //Debug.Log("Snowy Wonderland"); //Volume > 10 & <= 40
+                    {
+                        InfluenceState.text = "[Snowy Wonderland]";
+                        MusicPlayer.Instance.modelIndex = 1;
+                    }
 
-                    else if (volumeLevel is 2) InfluenceState.text = "[Snowstorm]"; //Debug.Log("Snowstorm"); //Volume > 40
+                    else if (volumeLevel is 2)  //Debug.Log("Snowstorm"); //Volume > 40
+                    {
+                        InfluenceState.text = "[Snowstorm]";
+                        MusicPlayer.Instance.modelIndex = 2;
+                    }
 
                     break;
 
                 case "Cave": //If the chosen influence is Cave
 
-                    if (volumeLevel is 0) InfluenceState.text = "[Crystal Cavern]"; //Debug.Log("Crystal Cavern"); //Volume <= 10
+                    if (volumeLevel is 0)  //Debug.Log("Crystal Cavern"); //Volume <= 10
+                    {
+                        InfluenceState.text = "[Crystal Cavern]";
+                        MusicPlayer.Instance.modelIndex = 0;
+                    }
 
-                    else if (volumeLevel is 1) InfluenceState.text = "[Common Cave]"; //Debug.Log("Common Cave"); //Volume > 10 & <= 40
+                    else if (volumeLevel is 1)  //Debug.Log("Common Cave"); //Volume > 10 & <= 40
+                    {
+                        InfluenceState.text = "[Common Cave]";
+                        MusicPlayer.Instance.modelIndex = 1;
+                    }
 
-                    else if (volumeLevel is 2) InfluenceState.text = "[Trembling Tunnels]"; //Debug.Log("Trembling Tunnels"); //Volume > 40
+                    else if (volumeLevel is 2)  //Debug.Log("Trembling Tunnels"); //Volume > 40
+                    {
+                        InfluenceState.text = "[Trembling Tunnels]";
+                        MusicPlayer.Instance.modelIndex = 2;
+                    }
 
                     break;
             }

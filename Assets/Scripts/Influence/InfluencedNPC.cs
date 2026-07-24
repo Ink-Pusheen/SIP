@@ -37,19 +37,19 @@ public class InfluencedNPC : InfluencedBase
         
     }
 
-    public override void OnForestInfluence()
+    public override void OnForestInfluence(int spriteIndex)
     {
         //Change the sprite
         if (spriteRenderer is not null) spriteRenderer.sprite = influenceSprites[1];
     }
 
-    public override void OnCaveInfluence()
+    public override void OnCaveInfluence(int spriteIndex)
     {
         //Change the sprite
         if (spriteRenderer is not null) spriteRenderer.sprite = influenceSprites[2];
     }
 
-    public override void OnSnowInfluence()
+    public override void OnSnowInfluence(int spriteIndex)
     {
         //Change the sprite
         if(spriteRenderer is not null) spriteRenderer.sprite = influenceSprites[3];

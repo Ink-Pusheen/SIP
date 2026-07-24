@@ -24,7 +24,7 @@ public class InfluencedChainReaction : InfluencedBase
 
     #region Overrides
 
-    public override void OnForestInfluence()
+    public override void OnForestInfluence(int changeIndex)
     {
         Debug.Log("Forest");
 
@@ -36,11 +36,11 @@ public class InfluencedChainReaction : InfluencedBase
     {
         foreach (InfluencedBase item in itemsToInfluence)
         {
-            item.ForceSwitchInfluenceState(MusicalInfluenceState.Forest);
+            item.ForceSwitchInfluenceState(MusicalInfluenceState.Forest, MusicPlayer.Instance.modelIndex);
         }
     }
 
-    public override void OnCaveInfluence()
+    public override void OnCaveInfluence(int changeIndex)
     {
         Debug.Log("Cave");
 
@@ -52,11 +52,11 @@ public class InfluencedChainReaction : InfluencedBase
     {
         foreach (InfluencedBase item in itemsToInfluence)
         {
-            item.ForceSwitchInfluenceState(MusicalInfluenceState.Cave);
+            item.ForceSwitchInfluenceState(MusicalInfluenceState.Cave, MusicPlayer.Instance.modelIndex);
         }
     }
 
-    public override void OnSnowInfluence()
+    public override void OnSnowInfluence(int changeIndex)
     {
         Debug.Log("Snow");
 
@@ -68,7 +68,7 @@ public class InfluencedChainReaction : InfluencedBase
     {
         foreach (InfluencedBase item in itemsToInfluence)
         {
-            item.ForceSwitchInfluenceState(MusicalInfluenceState.Snow);
+            item.ForceSwitchInfluenceState(MusicalInfluenceState.Snow, MusicPlayer.Instance.modelIndex);
         }
     }
 
